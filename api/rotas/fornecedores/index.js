@@ -37,7 +37,7 @@ roteador.get('/:idFornecedor', async (requisicao, resposta) => {
             JSON.stringify(fornecedor)
         )
     } catch (erro) {
-        resposta.status(400).send(
+        resposta.status(404).send(
             JSON.stringify({
                 mensagem: erro.message
             })
@@ -72,7 +72,7 @@ roteador.delete('/:idFornecedor', async (requisicao, resposta) => {
         await fornecedor.remover()
         resposta.status(204).end()
     } catch (erro) {
-        resposta.status(400).send(
+        resposta.status(404).send(
             JSON.stringify(
                 {mensagem: erro.message}
             )

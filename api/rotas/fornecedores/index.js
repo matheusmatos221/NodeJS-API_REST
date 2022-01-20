@@ -22,7 +22,7 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
     }
 })
 
-roteador.get('/:idFornecedor', async (requisicao, resposta) => {
+roteador.get('/:idFornecedor', async (requisicao, resposta, proximo) => {
 
     try {
         const id = requisicao.params.idFornecedor
@@ -32,15 +32,11 @@ roteador.get('/:idFornecedor', async (requisicao, resposta) => {
             JSON.stringify(fornecedor)
         )
     } catch (erro) {
-        resposta.status(404).send(
-            JSON.stringify({
-                mensagem: erro.message
-            })
-        )
+        proximo(erro)
     }
 })
 
-roteador.put('/:idFornecedor', async (requisicao, resposta) => {
+roteador.put('/:idFornecedor', async (requisicao, resposta, proximo) => {
     try{
         const id = requisicao.params.idFornecedor
         const dadosRecebidos = requisicao.body
@@ -51,17 +47,7 @@ roteador.put('/:idFornecedor', async (requisicao, resposta) => {
         await fornecedor.atualizar()
         resposta.status(204).end()
     } catch (erro) {
-        if (erro instanceof NaoEncontrado) {
-            resposta.status(404)
-        } else {
-            resposta.status(400)
-        }
-        resposta.send(
-            JSON.stringify({
-                mensagem: erro.mensagem,
-                id: erro.idErro
-            })
-        )
+        proximo(erro)
     }
 })
 

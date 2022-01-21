@@ -3,7 +3,7 @@ const NaoEncontrado = require('../../erros/NaoEncontrado')
 
 module.exports = {
     listar () {
-        return Modelo.findAll() // Método do sequelize
+        return Modelo.findAll({raw: true}) // Método do sequelize
     },
     inserir(fornecedor) {
         return Modelo.create(fornecedor) // Método do sequelize

@@ -51,8 +51,8 @@ app.use((erro, requisicao, resposta, proximo) => {
     resposta.send(
         serializador.serializar({
             mensagem: erro.message,
-        id: erro.idErro
-    })
+            id: erro.idErro
+        })
     )
 })
 

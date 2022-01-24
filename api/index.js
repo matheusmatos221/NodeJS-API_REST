@@ -48,12 +48,12 @@ app.use((erro, requisicao, resposta, proximo) => {
     const serializador = new SerializadorErro(
         resposta.getHeader('Content-Type')
     )
-     resposta.send(
-         serializador.serializar({
-             mensagem: erro.message,
-            id: erro.idErro
-        })
-     )
+    resposta.send(
+        serializador.serializar({
+            mensagem: erro.message,
+        id: erro.idErro
+    })
+    )
 })
 
 app.listen(config.get('api.porta'), () => console.log('A API está funcionando!'))
